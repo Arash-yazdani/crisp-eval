@@ -23,7 +23,7 @@ dependencies = []
 dev = ["pytest>=7.4"]
 
 [project.urls]
-Homepage = "https://github.com/Arash-yazdani/llm-judge-harness"
+Homepage = "https://github.com/Arash-yazdani/crisp-eval"
 
 [tool.setuptools.packages.find]
 where = ["src"]
