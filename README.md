@@ -13,8 +13,8 @@ looks good and means nothing.
 
 ## 1. An aggregate pass rate is a headline, not a measurement
 
-Scenarios are categorised with **CRISP** — Common, Realistic, Invalid/malicious,
-Specific/edge, Performance — split by *failure mode* rather than topic.
+Scenarios are categorised with **CRISP** (Common, Realistic, Invalid/malicious,
+Specific/edge, Performance), split by *failure mode* rather than topic.
 
 Here is why that matters. A hardening pass aimed at adversarial robustness
 produced this:
@@ -43,7 +43,7 @@ scenario-pass  = scenarios where EVERY turn passed / total scenarios
 ```
 
 Turn-pass is generous and moves smoothly. Scenario-pass is brutal and reflects
-user experience — a conversation with one bad turn in the middle is a bad
+user experience: a conversation with one bad turn in the middle is a bad
 conversation, not an 83% good one.
 
 **The gap between them is itself a measurement.** Turn-pass 87% with
@@ -73,9 +73,9 @@ Refused by default. Override with `allow_same_family=True` and document why.
 
 Two kinds of check:
 
-- **Graded dimensions** — scored 0.0–1.0 by a judge. Warmth, escalation
+- **Graded dimensions**: scored 0.0–1.0 by a judge. Warmth, escalation
   handling, sign-off quality. Genuinely subjective.
-- **Deterministic keys** — computed by code. Did a phone number leak? Did an
+- **Deterministic keys**: computed by code. Did a phone number leak? Did an
   internal tool name appear in spoken output?
 
 Handing a deterministic question to a judge is how you get 0.97 on "no PII
@@ -103,7 +103,7 @@ dropping hard scenarios, and panic at a fall that came from adding them.
 ## And one habit: calibrate the judge, publish the kappa
 
 An uncalibrated judge is an opinion with a decimal point. You have a judge
-scoring your agent at 87%. Is that true? You do not know — you have never
+scoring your agent at 87%. Is that true? You do not know. You have never
 checked it against anything. The only evidence your judge is a good judge is
 that it produces numbers you find plausible, which is the standard a broken
 judge also meets.
@@ -133,7 +133,7 @@ kappa. Raw agreement is inflated by class imbalance: if 95% of turns pass, a
 judge that says "pass" to everything scores 95% agreement while carrying zero
 information. Kappa puts that judge at 0.0, which is the truth.
 
-Below 0.61, do not gate a release on the judge — fix the judge first. And
+Below 0.61, do not gate a release on the judge; fix the judge first. And
 calibrate **per dimension** via `calibrate_all()`: a judge is often substantial
 on "was the outcome recorded correctly" and near-useless on "was the tone
 warm," because one has a fact of the matter and the other does not.
@@ -157,7 +157,7 @@ before they enter the repo.
 
 **The suite gets harder over time and the pass rate goes down.** That is the
 part people cannot stomach. If your pass rate has risen monotonically for six
-months, you are not mining failures — you are grading your own homework with an
+months, you are not mining failures; you are grading your own homework with an
 answer key you wrote.
 
 ## Release gate
@@ -178,7 +178,7 @@ anyone should ship on.
 python examples/demo_suite.py
 ```
 
-Runs the full loop offline against a synthetic bike-shop reminder agent — no
+Runs the full loop offline against a synthetic bike-shop reminder agent, with no
 API keys, deterministic output. Two scenarios are deliberately buggy so the
 demo shows the harness catching something rather than printing all green.
 
@@ -191,7 +191,7 @@ Nothing else changes.
 src/crisp_eval/
   taxonomy.py     CRISP categories, Scenario, Suite, era + balance guards
   rubric.py       graded dimensions, floors, deterministic safety keys
-  judge.py        judge protocol, cross-family enforcement, drift detection
+  judge.py        judge protocol, judge-family checks, drift detection
   runner.py       turn-pass / scenario-pass, category breakdown, release gate
   calibration.py  Cohen's kappa, per-dimension, false-pass asymmetry
   mining.py       failures -> redacted, deduplicated regression scenarios
@@ -216,8 +216,8 @@ Not the happy path. The things that go wrong:
 
 ## Related
 
-- **[familycheck-engineering](https://github.com/Arash-yazdani/familycheck-engineering)** — the production voice agent this was extracted from. Architecture, design decisions, and five months of evaluation results, including the run where the suite went from 10 to 50 adversarial scenarios and the score fell from 100% to 56%.
-- **[webhook-outbox-kit](https://github.com/Arash-yazdani/webhook-outbox-kit)** — the delivery half of the same system: fail-closed webhook signature verification across three vendor schemes, and a transactional outbox so a queued alert cannot be silently lost. 41 tests, no dependencies.
+- **[familycheck-engineering](https://github.com/Arash-yazdani/familycheck-engineering)**: the production voice agent this was extracted from. Architecture, design decisions, and five months of evaluation results, including the run where the suite went from 10 to 50 adversarial scenarios and the score fell from 100% to 56%.
+- **[webhook-outbox-kit](https://github.com/Arash-yazdani/webhook-outbox-kit)**: the delivery half of the same system: fail-closed webhook signature verification across three vendor schemes, and a transactional outbox so a queued alert cannot be silently lost. 41 tests, no dependencies.
 
 ## License
 

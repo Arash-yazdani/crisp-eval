@@ -1,4 +1,4 @@
-"""crisp-eval — an opinionated harness for LLM-as-judge evaluation.
+"""crisp-eval: an opinionated harness for LLM-as-judge evaluation.
 
 Five opinions, each of which exists because skipping it produces a number that
 looks good and means nothing:

@@ -13,7 +13,7 @@ the discipline around it.
 The `model` / `agent_model` pair is not bookkeeping. It is the single most
 important control in LLM-as-judge evaluation and almost nobody enforces it.
 
-Why cross-family matters
+Why judge family matters
 ------------------------
 If the judge and the agent are the same model, the judge shares the agent's
 blind spots, its phrasing preferences, and its failure modes. It will reliably

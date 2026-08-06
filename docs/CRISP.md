@@ -19,7 +19,7 @@ for making the measurement.
 Every scenario belongs to exactly one. The split is by **failure mode**, not by
 topic, because scenarios that fail for the same reason should move together.
 
-### C — Common case
+### C: Common case
 
 The modal interaction. What happens all day, with a cooperative user and
 everything working.
@@ -28,7 +28,7 @@ High traffic, low information. These scenarios pass early and stay passing, so
 they tell you almost nothing after week one. Keep them anyway: they are the
 canary for a hardening pass that made the agent worse at its actual job.
 
-### R — Realistic input
+### R: Realistic input
 
 Legitimate but messy. Interruptions, background noise, accents, half-answers,
 people talking over the agent, someone else picking up, a user who answers a
@@ -36,7 +36,7 @@ different question than the one asked.
 
 The gap between C and R is the gap between your demo and your product.
 
-### I — Invalid / malicious
+### I: Invalid / malicious
 
 Adversarial. Prompt injection, instruction hijacking, social engineering,
 probing for the system prompt, attempts to extract other users' data, requests
@@ -44,7 +44,7 @@ to do something out of scope framed as an emergency.
 
 **Safety-critical.** A regression here is an incident, not a quality dip.
 
-### S — Specific / edge
+### S: Specific / edge
 
 Rare branches where being wrong is expensive. Escalation paths, emergencies,
 the ambiguous-intent case, the "user said something that could mean two things
@@ -53,7 +53,7 @@ and one of them is urgent" case, voicemail, callbacks, wrong-number.
 **Safety-critical.** These are the scenarios that justify the whole product's
 existence and the ones a demo never covers.
 
-### P — Performance
+### P: Performance
 
 Degraded conditions. Latency, truncation, upstream timeouts, partial
 responses, rate limits, a tool call that hangs. Not "is it fast" but "what does
@@ -100,8 +100,8 @@ guardrails added to resist injection made the agent terser on ordinary calls.
 
 That is a **tradeoff you chose**, and it is only visible per-category. Tracking
 the aggregate alone, you would read the C and R dips as noise. Here they were a
-diagnosable artifact — a benign closing pattern the judge scored as "dead air"
-— traced, fixed with a redesigned sign-off, and confirmed clean in production.
+diagnosable artifact: a benign closing pattern the judge scored as "dead air",
+traced, fixed with a redesigned sign-off, and confirmed clean in production.
 
 ## Eras: why suites refuse to be compared
 
@@ -139,7 +139,7 @@ PII leaked" and no idea which three percent leaked.
 **Rule: every check you can make deterministic, you should.** Deterministic
 checks do not drift, cost nothing, and cannot be talked out of their answer by
 the thing they are grading. A turn that fails one is a failed turn regardless
-of how the graded dimensions scored — it did not "mostly pass."
+of how the graded dimensions scored. It did not "mostly pass."
 
 ## Judge hygiene
 
@@ -157,7 +157,7 @@ and judges are "co-optimized," you have described this failure as a feature.
 
 **Calibrate against human labels and publish the number.** An uncalibrated
 judge is an opinion with a decimal point. Label a sample by hand, compute
-Cohen's kappa, and report it next to the pass rate.
+an agreement statistic, and report it next to the pass rate.
 
 Use kappa rather than raw agreement, because raw agreement is inflated by class
 imbalance: if 95% of turns pass, a judge that says "pass" to everything scores
@@ -165,7 +165,7 @@ imbalance: if 95% of turns pass, a judge that says "pass" to everything scores
 which is the truth.
 
 Rough guide: below 0.61, do not gate a release on the judge. Fix the judge
-first. And calibrate **per dimension** — a judge is often substantial on "was
+first. And calibrate **per dimension**, because a judge is often substantial on "was
 the outcome recorded correctly" and near-useless on "was the tone warm,"
 because one has a fact of the matter and the other does not.
 
@@ -182,7 +182,7 @@ Production contains the ones you could not.
 
 Step four is the part people cannot stomach. **A suite that only ever gets
 easier to pass has stopped doing its job.** If your pass rate has risen
-monotonically for six months, you are not mining failures — you are grading
+monotonically for six months, you are not mining failures; you are grading
 your own homework with an answer key you wrote.
 
 Categorise mined failures by failure mode, not topic. Left alone, mined
