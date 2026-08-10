@@ -39,7 +39,7 @@ Below ~0.6, do not gate a release on this judge. Fix the judge first.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Sequence
 
 __all__ = [
     "Label",
