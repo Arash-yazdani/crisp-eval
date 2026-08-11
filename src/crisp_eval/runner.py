@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from statistics import mean
-from typing import Callable, Mapping, Sequence
+from typing import Callable, Mapping
 
 from .judge import Judge, JudgeRequest
 from .rubric import Rubric
