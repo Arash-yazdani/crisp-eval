@@ -8,7 +8,7 @@ pip install -e ".[dev]" && pytest -q
 # 42 passed in 0.03s
 ```
 
-Five opinions, each of which exists because skipping it produces a number that
+Six opinions, each of which exists because skipping it produces a number that
 looks good and means nothing.
 
 ## 1. An aggregate pass rate is a headline, not a measurement
@@ -98,6 +98,34 @@ improving. Comparing across that boundary is the most common self-deception in
 eval work, and it runs both ways: teams celebrate a rise that came from
 dropping hard scenarios, and panic at a fall that came from adding them.
 
+## 6. One run is a sample, not a score
+
+```
+# same code, same prompt, same 53 scenarios, three runs back to back
+90%   86%   88%
+```
+
+Nothing changed between those runs except sampling. If the agent runs above
+temperature 0, and most conversational agents have to, the number moves on its
+own. The size of that movement is the resolution limit of your suite.
+
+A four-point spread means a two-point improvement is noise wearing a number.
+Every "we raised it 3%" written against a single run was unfalsifiable.
+
+**Report the median and the range, never a single run.** 88%, spread 86 to 90,
+says what one number cannot: where the score sits and how much it wobbles.
+
+**Freeze the median run as the substrate for a labelling study, not the best
+one.** Picking the best run to label is how a calibration study inherits a
+lucky sample.
+
+**The skip set is a property of the run, not of the scenario design.** Scenarios
+that log no status at all varied across those same three runs: 4, then 7, then
+3, with zero scenarios skipping in all three. A denominator fixed in advance by
+naming scenarios is therefore wrong, however carefully it was pre-registered. It
+has to be read off a frozen run and committed before labelling begins.
+
+
 ---
 
 ## And one habit: calibrate the judge, publish the kappa
@@ -140,6 +168,20 @@ warm," because one has a fact of the matter and the other does not.
 
 `false_pass` is flagged separately from `false_fail` because a judge that hides
 failures is expensive in a way a judge that flags healthy output is not.
+
+**And kappa has its own failure mode, in the opposite direction.** At extreme
+marginals, where nearly every item passes and the raters mostly agree, kappa can
+go *negative* while raw agreement sits above 95%. That is the Feinstein-Cicchetti
+paradox, and it makes a well-behaved judge look broken in exactly the way class
+imbalance made a broken judge look fine. If your confusion matrix has a
+near-empty fail cell, report Gwet's AC1 alongside kappa and state which one you
+pre-registered as primary before labelling. `calibrate()` computes kappa today.
+AC1 is not implemented here yet.
+
+**And whichever you report, say what it does not cover.** An agreement study
+where the two raters never both marked the same item a failure validates the
+judge on the pass side and says almost nothing about the fail side, which is the
+only side a release gate depends on.
 
 ## Failure mining
 
