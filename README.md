@@ -258,7 +258,7 @@ Not the happy path. The things that go wrong:
 
 ## Related
 
-- **[familycheck-engineering](https://github.com/Arash-yazdani/familycheck-engineering)**: the production voice agent this was extracted from. Architecture, design decisions, and five months of evaluation results, including the run where the suite went from 10 to 50 adversarial scenarios and the score fell from 100% to 56%.
+- **[familycheck-engineering](https://github.com/Arash-yazdani/familycheck-engineering)**: the voice agent (private beta) this was extracted from. Architecture, design decisions, and five months of evaluation results, including the run where the suite went from 10 to 50 adversarial scenarios and the score fell from 100% to 56%.
 - **[webhook-outbox-kit](https://github.com/Arash-yazdani/webhook-outbox-kit)**: the delivery half of the same system: fail-closed webhook signature verification across three vendor schemes, and a transactional outbox so a queued alert cannot be silently lost. 41 tests, no dependencies.
 
 ## License

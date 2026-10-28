@@ -101,7 +101,7 @@ guardrails added to resist injection made the agent terser on ordinary calls.
 That is a **tradeoff you chose**, and it is only visible per-category. Tracking
 the aggregate alone, you would read the C and R dips as noise. Here they were a
 diagnosable artifact: a benign closing pattern the judge scored as "dead air",
-traced, fixed with a redesigned sign-off, and confirmed clean in production.
+traced, fixed with a redesigned sign-off, and confirmed clean on live calls.
 
 ## Eras: why suites refuse to be compared
 
